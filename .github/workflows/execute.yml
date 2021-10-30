@@ -1,9 +1,7 @@
 name: gold-notify
 on:
   schedule:
-  - cron: '* * * * *'
-  push:
-      branches: ["master"]
+    - cron: '*/5 * * * *'
   # schedule:
   #   - cron: "0 0 * * *" 
 jobs:
