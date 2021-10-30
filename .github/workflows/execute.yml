@@ -1,4 +1,4 @@
-name: py
+name: gold-notify
 on:
   schedule:
     - cron: "* * * * *"
