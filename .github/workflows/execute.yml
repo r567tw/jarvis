@@ -1,7 +1,9 @@
 name: py
 on:
-  push:
-      branches: ["master"]
+  schedule:
+    - cron: "* * * * *"
+  # push:
+  #     branches: ["master"]
       # schedule:
       #   - cron: "0 0 * * *" 
 jobs:
