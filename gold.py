@@ -8,7 +8,7 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 result = soup.find_all("td")
 
-price = int(result[-4].getText())
+price = int(result[2].getText().replace("買進",""))
 
 token = os.getenv("TOKEN")
 notify_url = "https://notify-api.line.me/api/notify"
