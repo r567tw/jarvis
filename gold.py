@@ -10,11 +10,12 @@ result = soup.find_all("td")
 
 price = int(result[2].getText().replace("買進",""))
 
-token = os.getenv("TOKEN")
-notify_url = "https://notify-api.line.me/api/notify"
+if (price > 1700):
+    token = os.getenv("TOKEN")
+    notify_url = "https://notify-api.line.me/api/notify"
 
-requests.post(
-    notify_url,
-    headers={'Authorization': "Bearer {}".format(token)},
-    data={"message":"\n今日黃金價格: {}元".format(price)}
-)
+    requests.post(
+        notify_url,
+        headers={'Authorization': "Bearer {}".format(token)},
+        data={"message":"\n今日黃金價格: {}元,已大於設定價格,可以考慮賣出".format(price)}
+    )
