@@ -11,7 +11,7 @@ url = "https://www.twse.com.tw/zh/holidaySchedule/holidaySchedule"
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "html.parser")
-result = soup.find_all("td")
+result = soup.find_all("table")[0]
 
 # - 去分析裡面的日期
 # https://www.twse.com.tw/zh/holidaySchedule/holidaySchedule
