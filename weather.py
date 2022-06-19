@@ -12,15 +12,16 @@ reports = {
 # todo: use apple shortcut update my current location
 # 先寫死台北市
 params = {
-    'Authorization': 'CWB-8617C293-566E-4A6E-BDBB-59443A4134C1',
+    'Authorization': os.getenv("WEATHER_TOKEN"),
     'format': 'JSON',
     'locationName': "臺北市"
 }
+# print(os.getenv("WEATHER_TOKEN"))
 url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001"
 response = requests.get(url,params)
 
 result = response.json()
-
+# print(result)
 content = "\n"
 # print(result['records']['location'][0]['weatherElement'])
 

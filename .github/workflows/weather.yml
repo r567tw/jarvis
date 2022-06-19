@@ -17,4 +17,5 @@ jobs:
       - name: execute py script # run the run.py to get the latest data
         run: python weather.py
         env:
-          TOKEN: ${{ secrets.TOKEN }} 
+          TOKEN: ${{ secrets.TOKEN }}
+          WEATHER_TOKEN: ${{ secrets.WEATHER_TOKEN }} 
