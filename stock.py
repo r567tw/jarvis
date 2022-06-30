@@ -1,17 +1,31 @@
+import time
 import twstock
-import requests
-from bs4 import BeautifulSoup
-import os
+from helpers import notify
 
-# stock = twstock.Stock('2330')
-# decision = twstock.BestFourPoint(stock).best_four_point()
-# print(decision)
+# 先寫死～
+stocks = [
+    {'number': '2330',  'ideal': 650}
+]
 
-url = "https://www.twse.com.tw/zh/holidaySchedule/holidaySchedule"
-response = requests.get(url)
+for stock in stocks:
+    stockNumber = stock['number']
+    
+    # 分析 twstock 資料
+    data = twstock.Stock(stockNumber)
+    decision = twstock.BestFourPoint(data).best_four_point()
+    price = twstock.realtime.get(stockNumber) 
+    realtime_price = int(float(price['realtime']['latest_trade_price']))
+    name = price['info']['name']
 
-soup = BeautifulSoup(response.text, "html.parser")
-result = soup.find_all("table")[0]
+    if (decision[0]):
+        message = "\n建議買入{} 價格:{}\n 原因：{}".format(stockNumber,realtime_price,decision[1])
+    else:
+        message = "\n建議賣出{} 價格:{}\n 原因：{}".format(stockNumber,realtime_price,decision[1])
+    
+    if (realtime_price < stock['ideal']):
+        # 低於購買價格，可能不考慮做任何決策
+        message = "\n{} 目前:{} 小於理想{}".format(name,realtime_price,stock['ideal'])
+    
+    notify.send(message)
+    # time.sleep(60)
 
-# - 去分析裡面的日期
-# https://www.twse.com.tw/zh/holidaySchedule/holidaySchedule
