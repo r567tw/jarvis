@@ -4,7 +4,9 @@ from helpers import notify
 
 # 先寫死～
 stocks = [
-    {'number': '2330',  'ideal': 650}
+    {'number': '2330',  'ideal': 600, 'decision': False},
+    {'number': '0056',  'ideal': 30, 'decision': True},
+    {'number': '2891',  'ideal': 25, 'decision': True}
 ]
 
 for stock in stocks:
@@ -17,15 +19,29 @@ for stock in stocks:
     realtime_price = int(float(price['realtime']['latest_trade_price']))
     name = price['info']['name']
 
+    message = name
+
     if (decision[0]):
-        message = "\n建議買入{} 價格:{}\n 原因：{}".format(stockNumber,realtime_price,decision[1])
+        message += "\ntwStock: 建議買入\n原因：{}".format(decision[1])
     else:
-        message = "\n建議賣出{} 價格:{}\n 原因：{}".format(stockNumber,realtime_price,decision[1])
+        message += "\ntwStock: 建議賣出\n原因：{}".format(decision[1])
     
-    if (realtime_price < stock['ideal']):
-        # 低於購買價格，可能不考慮做任何決策
-        message = "\n{} 目前:{} 小於理想{}".format(name,realtime_price,stock['ideal'])
-    
-    notify.send(message)
-    # time.sleep(60)
+    if stock["decision"]:
+        # 個人決策想買
+        if (realtime_price < stock['ideal']):
+            # 低於購買價格，可能不考慮做任何決策
+            message += "\n{} {}<{} 請參考上面四大賣點建議，考慮買進".format(name,realtime_price,stock['ideal'])
+        else:
+            message = "\n{} {}>{} 不做決策".format(name,realtime_price,stock['ideal'])
+    else:
+        # 個人決策想賣
+        if (realtime_price > stock['ideal']):
+            # 低於購買價格，可能不考慮做任何決策
+            message += "\n{} {}>{} 請參考上面四大賣點建議，考慮賣出".format(name,realtime_price,stock['ideal'])
+        else:
+            message = "\n{} {}<={} 不做決策".format(name,realtime_price,stock['ideal'])
+
+    if message != "":
+        notify.send(message)
+    time.sleep(10)
 
