@@ -1,3 +1,4 @@
 .env
+.temp
 helpers/__pycache__
 todo

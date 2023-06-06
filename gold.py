@@ -24,3 +24,4 @@ if price < want_buy_price:
 
 print(content)
 notify.send(content)
+# telegram.send(content)
