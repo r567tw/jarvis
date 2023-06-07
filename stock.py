@@ -9,14 +9,21 @@ stocks = [
     {'number': '2891',  'ideal': 25, 'decision': True}
 ]
 
+# 更新台灣的Code表
+twstock.__update_codes()
+
 for stock in stocks:
     stockNumber = stock['number']
     
     # 分析 twstock 資料
     data = twstock.Stock(stockNumber)
     decision = twstock.BestFourPoint(data).best_four_point()
-    price = twstock.realtime.get(stockNumber) 
-    realtime_price = int(float(price['realtime']['latest_trade_price']))
+    price = twstock.realtime.get(stockNumber)
+    if  price['realtime']['latest_trade_price'] != "-":
+        realtime_price = int(float(price['realtime']['latest_trade_price']))
+    else:
+        realtime_price = int(float(stock['realtime']['best_bid_price'][0]))
+
     name = price['info']['name']
 
     message = name
