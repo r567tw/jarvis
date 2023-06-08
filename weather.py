@@ -20,15 +20,17 @@ response = requests.get(url, params)
 
 result = response.json()
 # print(result)
-content = "\n[{}-{}]\n".format(params["locationName"],params["sitename"])
+content = "\n[{}-{}]\n".format(params["locationName"], params["sitename"])
 
 for element in result["records"]["location"][0]["weatherElement"]:
     if element["elementName"] in reports.keys():
         report = reports[element["elementName"]]
 
-        content += "{}~{} {} {}%".format(
-            time.strftime("%H",time.strptime(element["time"][0]["startTime"],"%Y-%m-%d %H:%M:%S")),
-            time.strftime("%H",time.strptime(element["time"][0]["endTime"],"%Y-%m-%d %H:%M:%S")),
+        content += "{}~{} {} {}".format(
+            time.strftime("%H", time.strptime(
+                element["time"][0]["startTime"], "%Y-%m-%d %H:%M:%S")),
+            time.strftime("%H", time.strptime(
+                element["time"][0]["endTime"], "%Y-%m-%d %H:%M:%S")),
             report,
             element["time"][0]["parameter"]["parameterName"],
         )
