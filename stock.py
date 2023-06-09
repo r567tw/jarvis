@@ -1,12 +1,14 @@
 import time
 import twstock
-from helpers import notify
+from helpers import telegram
 
 # 先寫死～
 stocks = [
+    {'number': '00891',  'ideal': 16, 'decision': False},
+    {'number': '00881',  'ideal': 18, 'decision': False},
     {'number': '2330',  'ideal': 600, 'decision': False},
-    {'number': '0056',  'ideal': 30, 'decision': True},
-    {'number': '2891',  'ideal': 25, 'decision': True}
+    {'number': '00878',  'ideal': 15, 'decision': True},
+    {'number': '2891',  'ideal': 20, 'decision': True}
 ]
 
 # 更新台灣的Code表
@@ -40,8 +42,8 @@ for stock in stocks:
             message += "\n{} {}<{} 請參考上面四大賣點建議，考慮買進".format(
                 name, realtime_price, stock['ideal'])
         else:
-            message = "\n{} {}>{} 不做決策".format(
-                name, realtime_price, stock['ideal'])
+            message = "\n{} {}>{} 不做決策({})".format(
+                name, realtime_price, stock['ideal'], "想買")
     else:
         # 個人決策想賣
         if (realtime_price > stock['ideal']):
@@ -49,9 +51,10 @@ for stock in stocks:
             message += "\n{} {}>{} 請參考上面四大賣點建議，考慮賣出".format(
                 name, realtime_price, stock['ideal'])
         else:
-            message = "\n{} {}<={} 不做決策".format(
-                name, realtime_price, stock['ideal'])
+            message = "\n{} {}<={} 不做決策({})".format(
+                name, realtime_price, stock['ideal'], "想賣")
 
     if message != "":
-        notify.send(message)
-    time.sleep(10)
+        telegram.send(message)
+        # notify.send(message)
+    time.sleep(60)
