@@ -19,7 +19,12 @@ for stock in stocks:
 
     # 分析 twstock 資料
     data = twstock.Stock(stockNumber)
-    decision = twstock.BestFourPoint(data).best_four_point()
+    
+    try:
+        decision = twstock.BestFourPoint(data).best_four_point()
+    except:
+        decision = None
+    
     price = twstock.realtime.get(stockNumber)
     if price['realtime']['latest_trade_price'] != "-":
         realtime_price = int(float(price['realtime']['latest_trade_price']))
@@ -30,9 +35,10 @@ for stock in stocks:
 
     message = name
 
-    if (decision[0]):
+    if (decision[0] == True and decision != None):
         message += "\ntwStock: 建議買入\n原因：{}".format(decision[1])
-    else:
+    
+    if (decision[0] == False and decision != None):
         message += "\ntwStock: 建議賣出\n原因：{}".format(decision[1])
 
     if stock["decision"]:
