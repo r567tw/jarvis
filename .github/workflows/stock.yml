@@ -1,7 +1,7 @@
 name: stock-notify
 on:
   schedule:
-    - cron: '0 3 * * 3'
+    - cron: '0 4 * * 3'
 jobs:
   build:
     runs-on: ubuntu-latest
