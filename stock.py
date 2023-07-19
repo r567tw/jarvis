@@ -4,9 +4,7 @@ from helpers import telegram
 
 # 先寫死～
 stocks = [
-    # {'number': '00891',  'ideal': 16, 'decision': False},
     # {'number': '00881',  'ideal': 18, 'decision': False},
-    {'number': '2330',  'ideal': 600, 'decision': False},
     # {'number': '00878',  'ideal': 15, 'decision': True},
     {'number': '2891',  'ideal': 20, 'decision': True}
 ]
