@@ -2,7 +2,7 @@ name: weather-notify
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
+      - master  # Set a branch to deploy
   schedule:
     - cron: '0 22 * * *'
 jobs:
