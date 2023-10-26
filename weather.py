@@ -40,13 +40,14 @@ for element in result["records"]["location"][0]["weatherElement"]:
         content += "\n"
 
 # 空氣品質
-url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
-response = requests.get(url, params)
-result = response.json()
-
-for record in result["records"]:
-    if (record["sitename"] == params["sitename"] and record["county"] == params["locationName"]):
-        content += "空氣品質: {}".format(record["status"])
-
+try:
+    url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
+    response = requests.get(url, params)
+    result = response.json()
+    for record in result["records"]:
+        if (record["sitename"] == params["sitename"] and record["county"] == params["locationName"]):
+            content += "空氣品質: {}".format(record["status"])
+except:                  
+    content += "空氣品質: {}".format("取得失敗！")
 
 notify.send(content)
