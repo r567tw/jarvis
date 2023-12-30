@@ -1,5 +1,4 @@
 import os
-from tracemalloc import start
 import requests
 from helpers import notify
 import time
@@ -18,7 +17,6 @@ url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001"
 response = requests.get(url, params)
 
 result = response.json()
-# print(result)
 content = "\n[{}-{}]\n".format(params["locationName"], params["sitename"])
 
 for element in result["records"]["location"][0]["weatherElement"]:
