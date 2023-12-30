@@ -7,7 +7,6 @@ import time
 reports = {"Wx": "天氣現象", "PoP": "降雨機率"}
 
 # todo: use apple shortcut update my current location
-# 先寫死台北市
 params = {
     "Authorization": os.getenv("WEATHER_TOKEN"),
     "format": "JSON",
