@@ -13,7 +13,7 @@ params = {
     "sitename": "前金",
 }
 
-url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001"
+url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001"
 response = requests.get(url, params)
 
 result = response.json()
