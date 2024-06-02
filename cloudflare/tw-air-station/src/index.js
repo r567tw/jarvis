@@ -12,17 +12,13 @@ export default {
 		// 查找最近的 sitename
 		let nearestSitename = this.findNearestSitename(latitude, longitude);
 
-		let html = {
+		let data = {
 			"nearest": nearestSitename,
 			"lat": latitude,
 			"log": longitude
 		};
 
-		return new Response(JSON.stringify(html), {
-			headers: {
-				"content-type": "text/json;charset=UTF-8",
-			},
-		});
+		return Response.json(data);
 	},
 
 	// 找到最近的 sitename

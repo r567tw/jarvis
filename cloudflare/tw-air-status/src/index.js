@@ -22,14 +22,10 @@ export default {
 			air_status = "狀態取得失敗";
 		}
 
-		let html = {
+		let data = {
 			"air": air_status
 		};
 
-		return new Response(JSON.stringify(html), {
-			headers: {
-				"content-type": "text/json;charset=UTF-8",
-			},
-		});
+		return Response.json(data)
 	}
 };
