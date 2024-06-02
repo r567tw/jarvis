@@ -31,7 +31,10 @@ export default {
 		}
 
 		let data = {
-			"air": air_status
+			"station": nearestSitename,
+			"air": air_status,
+			"lat": latitude,
+			"log": longitude
 		};
 
 		return Response.json(data)
