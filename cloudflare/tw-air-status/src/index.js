@@ -15,7 +15,7 @@ export default {
 		let air_status = "";
 
 		try {
-			const response = await fetch("https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON");
+			const response = await fetch("https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=04387458-0f09-47f9-9f68-9de9c4b69fdc&limit=1000&sort=ImportDate%20desc&format=JSON");
 			const content = await response.json();
 			const records = content.records;
 
